@@ -1,3 +1,9 @@
+// when the user clicks on a button from the nav bar this function will run
+const navigateTo = url => {
+    history.pushState(null, null, url);
+    router();
+}
+
 // client side router. also defining each one of our routes
 const router = async () => {
     const routes = [
@@ -27,11 +33,24 @@ if(!match){
         isMatch: true
     }
 }
-    console.log(potentialMatches)
+// calling the view function from the path above
+    console.log(match.route.view())
 };
+
+// this is for when the user is one page, hits the back button it will rerun the router
+window.addEventListener("popstate", router);
 
 // calling the router
 // once the DOM has loaded up, we will run the router function
 document.addEventListener("DOMContentLoaded", () => {
+// this is a dedicated event listener. when a user adds new content to the page and they have links they will actually work
+document.addEventListener("click", e => {
+    // this is saying "does this element(e) have the data-link attribute?"
+    if(e.target.matches("[data-link]")){
+        // prevents the default link from firing and instead goes to the target without a page refresh
+        e.preventDefault();
+        navigateTo(e.target.href)
+    }
+})
     router();
 })
