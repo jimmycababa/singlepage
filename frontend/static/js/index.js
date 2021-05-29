@@ -1,3 +1,9 @@
+// importing the dashboard file
+import dashboard from "./views/dashboard.js"
+import Posts from "./views/Posts.js"
+import Settings from "./views/Settings"
+
+
 // when the user clicks on a button from the nav bar this function will run
 const navigateTo = url => {
     history.pushState(null, null, url);
@@ -8,9 +14,10 @@ const navigateTo = url => {
 const router = async () => {
     const routes = [
         // whenever the user goes to the route path, we are going to run the view function
-        { path: "/", view: () => console.log("viewing home page") },
-        { path: "/posts", view: () => console.log("viewing posts") },
-        { path: "/settings", view: () => console.log("viewing settings") },
+        // this is the dashboard class reference
+        { path: "/", view: dashboard },
+        { path: "/posts", view: Posts },
+        { path: "/settings", view: Settings },
     ];
 
     // test each route for potential match by looping through them
@@ -33,8 +40,15 @@ if(!match){
         isMatch: true
     }
 }
+
+// creating a new instance of the view at the match route right above
+const view = new match.route.view()
+
+// getting the html from the async method in the dashboard.js file and injecting it into the innerHTML of '#app'
+document.querySelector('#app').innerHTML = await view.getHtml();
+
+
 // calling the view function from the path above
-    console.log(match.route.view())
 };
 
 // this is for when the user is one page, hits the back button it will rerun the router

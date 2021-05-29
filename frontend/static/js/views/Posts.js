@@ -4,17 +4,17 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     constructor() {
         super();
-        this.setTitle("Home")
+        this.setTitle("Posts");
     }
 
     // there are backticks to make this html readable
     async getHtml(){
         return `
-        <h1>Hello There!</h1>
+        <h1>Posts</h1>
 
         <p>
 
-            This is a follow along coded page that I will eventually make my own!
+            Viewing the Posts
 
         </p>
         <p>
