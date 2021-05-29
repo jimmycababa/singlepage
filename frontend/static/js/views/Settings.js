@@ -14,7 +14,7 @@ export default class extends AbstractView {
 
         <p>
 
-            Viewing the Settings
+            Viewing the Settings and Hoping it Works...
 
         </p>
         <p>
